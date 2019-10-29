@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Karduni Website</title>
+
+    <link rel="shortcut icon" href="favicon.ico" />
+    <link rel="stylesheet" type="text/css" href="css/base.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo1.css" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+    <script>
+      document.documentElement.className = "js";
+      var supportsCssVars = function() {
+        var e,
+          t = document.createElement("style");
+        return (
+          (t.innerHTML = "root: { --tmp-var: bold; }"),
+          document.head.appendChild(t),
+          (e = !!(
+            window.CSS &&
+            window.CSS.supports &&
+            window.CSS.supports("font-weight", "var(--tmp-var)")
+          )),
+          t.parentNode.removeChild(t),
+          e
+        );
+      };
+      supportsCssVars() ||
+        alert(
+          "Please view this demo in a modern browser that supports CSS Variables."
+        );
+    </script>
+  </head>
+  <body class="demo-1">
+    <nav class="navbar fixed-top navbar-expand-lg navbar-light">
+      <a class="navbar-brand navbar-right" href="#">
+        <img id="logo" src="images/Logo.png" alt="" />
+      </a>
+      <div class="collapse navbar-collapse mr-auto" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="#home">Home</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#about">About</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#research">Research Highlights</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#publications">Pubications</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#cv">CV</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="#art">Art</a>
+          </li>
+        </ul>
+      </div>
+    </nav>
+    <main class="container main">
+      <div class="jumbotron" id="home">
+        <p>
+          <span>Cities </span> <span>Social Media</span> <span>People</span
+          ><span> Information</span><span> Visual Analytics</span>
+          <span> Digital Arts</span> <span> Technology</span>
+          <span>Interactivity</span> <span>:)</span>
+        </p>
+      </div>
+      <hr class="new5" />
+      <div class="row item2" id="about">
+        <h1 class="heading">About Me!</h1>
+        <p>
+          I am a PhD candidate in Computer Science at UNC-Charlotte with a
+          background in Urban Planning, Architecture, and Information
+          Technology. My work is at the intersection of urban studies,
+          computational social science, and design. <br />
+          My work at UNC-Charlotte includes teaching the introductory
+          computational design course at the School of Architecture. I am also a
+          research assistant and a teaching assistant at the CS department for
+          the Visual Analytics course. Most recently, I have been studying how
+          the flow of information affects the usage of public space and how we
+          can utilize the data to understand the complexity of human activity.
+          <br />
+          I aim to use these understandings for the betterment of the public
+          domain. I use computational methods to study the flow of people, urban
+          protests, etc. Through my work, I have made various systems including
+          a Visual Analytics system for Urban Planning, one of the first Visual
+          analytics systems for battling misinformation, and I also conduct
+          research on novel ways on battling misinformation on social media.
+        </p>
+      </div>
+      <hr class="new5" />
+      <hr />
+      <div id="research">
+        <h1 class="heading">Research Highlights</h1>
+        <div class="row heading"><h2>Talk at ACM IUI</h2></div>
+        <div class="row item">
+          <div class="col">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/PYFht9Y4pWA"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="col">
+            <p>
+              At ACM IUI, I discuss how various Computational Techniques are
+              combined within an intelligent system to help battle
+              misinformation on social media.
+            </p>
+          </div>
+        </div>
+        <div class="row heading"><h2>Talk at CUPUM 2019</h2></div>
+        <div class="row item">
+          <div class="col-6">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/aoSU__oMdhQ"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="col-6">
+            <p>
+              At CUPUM 2019, I discuss a method to develop flow polylines using
+              episodic geolocated tweet data and analyzing flows generated from
+              Twitter in relation to urban space.
+            </p>
+          </div>
+        </div>
+
+        <div class="row heading"><h2>Urban Activity Explorer</h2></div>
+        <div class="row item">
+          <div class="col">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/vw9p1yUtXN4"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="col">
+            <p>
+              In this video, I discuss the different components of Urban
+              Activity Explorer, a visual analytics for urban planning.
+            </p>
+          </div>
+        </div>
+
+        <div class="row heading">
+          <h2>Vulnerable to Misinformation? Verifi!</h2>
+        </div>
+        <div class="row item">
+          <div class="col">
+            <iframe
+              width="100%"
+              height="100%"
+              src="https://www.youtube.com/embed/ZlR8M4ZWrrY"
+              frameborder="0"
+              allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen
+            ></iframe>
+          </div>
+          <div class="col">
+            <p>
+              In this video, I discuss the different components of Urban
+              Activity Explorer, a visual analytics for urban planning.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <hr class="new5" />
+      <div id="publications">
+        <h1 class="heading">Publications</h1>
+        <div class="row item2">
+          <div class="col">
+            <a
+              href="https://scholar.google.com/citations?user=tFg77gIAAAAJ&hl=en&oi=ao"
+              >Google Scholar</a
+            >
+          </div>
+          <div class="col">
+            <a href="https://www.researchgate.net/profile/Alireza_Karduni"
+              >Research Gate</a
+            >
+          </div>
+        </div>
+      </div>
+      <hr class="new5" />
+      <div id="cv">
+        <h1 class="heading">CV</h1>
+        <div class="row item2">
+          <iframe
+            src="https://drive.google.com/file/d/1qQ7SJl68pSWbrflaqTFf-GwpbbzWLpEC/preview"
+            width="100%"
+            height="480"
+          ></iframe>
+        </div>
+      </div>
+      <hr class="new5" />
+      <div id="art">
+        <h1 class="heading">Arts & Design</h1>
+        <div class="row item2">
+          <div class="col">
+            <a href="https://soundcloud.com/don-kordeone"
+              >Sounds: Sound Cloud</a
+            >
+          </div>
+          <div class="col">
+            <a href="https://www.instagram.com/kardunart/">Visual: Instagram</a>
+          </div>
+        </div>
+      </div>
+    </main>
+    <div id="container"></div>
+  <script type="text/javascript" src="scripts/index.37758b6349efa4f2594f.js"></script></body>
+  <script>
+    setInterval(function() {
+      var els = $("#home span");
+      els.each(function(el) {
+        if (Math.random() < 0.5) $(els[el]).css("display", "none");
+        else $(els[el]).css("display", "");
+      });
+    }, 2000);
+    $(".navbar a").click(function(event) {
+      event.preventDefault();
+      var id = $(this).attr("href");
+      $("html, body").animate(
+        {
+          scrollTop: $(id).offset().top - 80
+        },
+        1000
+      );
+    });
+  </script>
+</html>
