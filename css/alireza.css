@@ -1,6 +1,7 @@
 body {
   font-family: "Biryani", sans-serif;
   letter-spacing: 0.0625em;
+  overflow-x: hidden;
 }
 
 a {
@@ -51,6 +52,7 @@ mx-auto .navfont {
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-size: cover;
+  overflow: hidden;
 }
 
 .masthead h1 {
