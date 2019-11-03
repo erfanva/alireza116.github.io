@@ -29,6 +29,8 @@ a:hover {
 .typewrite {
   font-family: "Special Elite", cursive;
   color: white;
+  /* color: #c33c54; */
+  text-shadow: #161616;
   z-index: 9999;
   pointer-events: none;
 }
