@@ -1,0 +1,47 @@
+* {
+  font-family: "Source Sans Pro", sans-serif;
+  box-sizing: border-box;
+}
+.line,
+.lines {
+  fill: none;
+  /*stroke: steelblue;*/
+  /*stroke-width: 100;*/
+
+  stroke-linejoin: round;
+  /*stroke-width: 10px;*/
+}
+
+/*.line path{}*/
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+}
+
+.chart_axis {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.control {
+  /* margin-top: 100px;
+  margin-left: 20px; */
+  margin: 0;
+  float: left;
+  width: 20%;
+}
+#chart {
+  float: left;
+  margin: 0;
+  width: 80%;
+  height: 600px;
+  /* margin-left: 280px; */
+}
+
+.grid line {
+  stroke: lightgrey;
+  stroke-opacity: 0.5;
+  shape-rendering: crispEdges;
+}
