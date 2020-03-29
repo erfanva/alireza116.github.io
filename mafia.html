@@ -18,6 +18,8 @@
       integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
       crossorigin="anonymous"
     />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
     <script
       src="https://code.jquery.com/jquery-3.4.1.js"
       integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
@@ -82,6 +84,7 @@
           get mafia assignment
         </button>
       </form>
+      <ul id="results"></ul>
     </div>
 
     <script>
@@ -100,18 +103,36 @@
         // console.log(mafia_obj);
         if (mafia_obj["names"].length > 1) {
           console.log(mafia_obj);
-          $.ajax({
-            type: "POST",
-            headers: { "Access-Control-Allow-Origin": "*" },
-            contentType: "application/json",
+          //   $.ajax({
+          //     type: "POST",
+          //     headers: { "Access-Control-Allow-Origin": "*" },
+          //     contentType: "application/json",
+          //     url:
+          //       "https://us-central1-urbanactivity-199915.cloudfunctions.net/function-1",
+          //     data: JSON.stringify(mafia_obj),
+          //     dataType: "json",
+          //     success: function(response) {
+          //       console.log(response);
+          //     }
+          //   });
+          axios({
+            method: "post",
             url:
-              "https://us-central1-urbanactivity-199915.cloudfunctions.net/function-1",
-            data: JSON.stringify(mafia_obj),
-            dataType: "json",
-            success: function(response) {
-              console.log(response);
-            }
-          });
+              "https://us-central1-urbanactivity-199915.cloudfunctions.net/function-1", // or https://us-central1-PROJECT_NAME.cloudfunctions.net/test_message_json
+            data: mafia_obj
+          })
+            .then(response => {
+              var mafia_result = response.data;
+              $("body").append("");
+              Object.keys(mafia_result).forEach(function(name) {
+                $("#results").append(
+                  `<li>${name}: ${mafia_result[name]} </li>`
+                );
+              });
+            })
+            .catch(error => {
+              console.log(error);
+            });
         } else {
           alert("please enter names with space between names");
         }
