@@ -80,14 +80,14 @@
             field: "sentiment",
             stops: [
               {
-                value: -0.5,
+                value: -1,
                 color: "#FF5733",
-                label: "negative sentiment < 0.1",
+                label: "negative sentiment = -1",
               },
               {
-                value: 0.5,
-                color: "#01B90F",
-                label: "positive sentiment >0.1",
+                value: -0.5,
+                color: "#DEC900",
+                label: "negative sentiment = -0.5",
               },
             ],
           },
@@ -111,9 +111,11 @@
         url: "./tweetPointsFilter.geojson",
         popupTemplate: template,
         title: "geolocated tweets",
-        // featureReduction: clusterConfig,
+        featureReduction: clusterConfig,
         renderer: renderer, //optional
       });
+
+      console.log(geojsonLayer);
 
       const heatmapLayer = new GeoJSONLayer({
         url: "./tweetPointsFilter.geojson",
@@ -135,6 +137,12 @@
         map: map,
         center: [-97.362231, 39.42908], // longitude, latitude
         zoom: 5,
+      });
+
+      view.whenLayerView(geojsonLayer).then(function (geojsonLayer) {
+        geojsonLayer.filter = {
+          where: "sentiment < 0.5",
+        };
       });
 
       view.ui.add(
