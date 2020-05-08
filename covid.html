@@ -19,6 +19,7 @@
       body {
         height: 100%;
         width: 100%;
+        margin: 0;
       }
       #viewDiv {
         padding: 0;
@@ -26,10 +27,40 @@
         height: 100%;
         width: 100%;
       }
+      #viewDiv {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+      #infoDiv {
+        padding: 10px;
+        width: 275px;
+      }
+      #sliderValue {
+        font-weight: bolder;
+      }
+      #legendDiv {
+        width: 260px;
+      }
+      #description {
+        padding: 10px 0 10px 0;
+      }
     </style>
   </head>
   <body>
     <div id="viewDiv"></div>
+    <div id="infoDiv" class="esri-widget">
+      <button id="toggleCluster" class="esri-button">Disable Clustering</button>
+      <div id="description">
+        Show tweets with at max
+        <span id="sliderValue">-0.5</span> sentiment score
+      </div>
+      <div id="sliderContainer">
+        <div id="sliderDiv"></div>
+      </div>
+      <div id="legendDiv"></div>
+    </div>
   </body>
   <script>
     require([
@@ -53,6 +84,7 @@
         title: "tweet",
         content: "{text} <br> sentiment: {sentiment}",
       };
+
       const clusterConfig = {
         type: "cluster",
         clusterRadius: "100px",
@@ -94,18 +126,18 @@
         ],
       };
 
-      const hrenderer = {
-        type: "heatmap",
-        colorStops: [
-          { ratio: 0, color: "rgba(255, 255, 255, 0)" },
-          { ratio: 0.2, color: "rgba(255, 255, 255, 0.1)", opacity: 0.5 },
-          { ratio: 0.5, color: "rgba(255, 140, 0, 0.5)", opacity: 0.5 },
-          { ratio: 0.8, color: "rgba(255, 140, 0, 0.5)", opacity: 0.5 },
-          { ratio: 1, color: "rgba(255, 0, 0, 0.1)", opacity: 0.5 },
-        ],
-        maxPixelIntensity: 50,
-        minPixelIntensity: 2,
-      };
+      // const hrenderer = {
+      //   type: "heatmap",
+      //   colorStops: [
+      //     { ratio: 0, color: "rgba(255, 255, 255, 0)" },
+      //     { ratio: 0.2, color: "rgba(255, 255, 255, 0.1)", opacity: 0.5 },
+      //     { ratio: 0.5, color: "rgba(255, 140, 0, 0.5)", opacity: 0.5 },
+      //     { ratio: 0.8, color: "rgba(255, 140, 0, 0.5)", opacity: 0.5 },
+      //     { ratio: 1, color: "rgba(255, 0, 0, 0.1)", opacity: 0.5 },
+      //   ],
+      //   maxPixelIntensity: 50,
+      //   minPixelIntensity: 2,
+      // };
 
       const geojsonLayer = new GeoJSONLayer({
         url: "./tweetPointsFilter.geojson",
@@ -117,12 +149,12 @@
 
       console.log(geojsonLayer);
 
-      const heatmapLayer = new GeoJSONLayer({
-        url: "./tweetPointsFilter.geojson",
-        title: "number of tweets",
-        opacity: 0.5,
-        renderer: hrenderer,
-      });
+      // const heatmapLayer = new GeoJSONLayer({
+      //   url: "./tweetPointsFilter.geojson",
+      //   title: "number of tweets",
+      //   opacity: 0.5,
+      //   renderer: hrenderer,
+      // });
 
       var map = new Map({
         basemap: "dark-gray",
@@ -139,19 +171,69 @@
         zoom: 5,
       });
 
+      console.log(geojsonLayer);
+
       view.whenLayerView(geojsonLayer).then(function (geojsonLayer) {
         geojsonLayer.filter = {
-          where: "sentiment < 0.5",
+          where: "sentiment = -1",
         };
       });
 
+      const legend = new Legend({
+        view: view,
+        container: "legendDiv",
+      });
+
+      const infoDiv = document.getElementById("infoDiv");
       view.ui.add(
-        new Legend({
+        new Expand({
           view: view,
+          content: infoDiv,
+          expandIconClass: "esri-icon-layer-list",
+          expanded: true,
         }),
         "top-right"
       );
+
+      const toggleButton = document.getElementById("toggleCluster");
+      toggleButton.addEventListener("click", toggleClustering);
+
+      function toggleClustering() {
+        let fr = geojsonLayer.featureReduction;
+        geojsonLayer.featureReduction =
+          fr && fr.type === "cluster" ? null : clusterConfig;
+        toggleButton.innerText =
+          toggleButton.innerText === "Enable Clustering"
+            ? "Disable Clustering"
+            : "Enable Clustering";
+      }
+
+      view.whenLayerView(geojsonLayer).then(function (geojsonLayer) {
+        const field = "sentiment";
+
+        const slider = new Slider({
+          min: -1.0,
+          max: -0.5,
+          values: [-0.5],
+          container: document.getElementById("sliderDiv"),
+          visibleElements: {
+            rangeLabels: true,
+          },
+          precision: 3,
+          steps: 0.01,
+        });
+
+        const sliderValue = document.getElementById("sliderValue");
+
+        slider.on(["thumb-change", "thumb-drag"], function (event) {
+          sliderValue.innerText = event.value;
+          console.log(event.value);
+          geojsonLayer.filter = {
+            // where: field + " < " + event.value,
+            where: "sentiment <= " + event.value,
+          };
+        });
+      });
     });
   </script>
 </html>
-,
