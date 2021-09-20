@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!-->
+<html class="no-js">
+  <!--<![endif]-->
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title></title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="" />
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script
+      src="https://code.jquery.com/jquery-3.4.1.js"
+      integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+      integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+      integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <!--[if lt IE 7]>
+      <p class="browsehappy">
+        You are using an <strong>outdated</strong> browser. Please
+        <a href="#">upgrade your browser</a> to improve your experience.
+      </p>
+    <![endif]-->
+
+    <div class="container">
+      <h2>welcome to Kardun Mafia</h2>
+      <form id="mafia-form">
+        <div class="form-group">
+          <label for="names">Input names with space as seperator</label>
+          <input
+            type="text"
+            class="form-control"
+            id="names"
+            name="names"
+            placeholder="ali saman mammad"
+          />
+        </div>
+        <div class="form-group">
+          <label for="mafia_count">How many mafias?</label>
+          <input
+            type="number"
+            class="form-control"
+            id="mafia_count"
+            name="mafia_count"
+            placeholder="10"
+          />
+        </div>
+        <div class="form-check">
+          <input type="checkbox" class="form-check-input" name="dr" id="dr" />
+          <label class="form-check-label" for="dr?">dr?</label>
+        </div>
+        <div class="form-check">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            name="detective"
+            id="detective"
+          />
+          <label class="form-check-label" for="detective">detective?</label>
+        </div>
+        <button id="mafia-submit" class="btn btn-primary">
+          get mafia assignment
+        </button>
+      </form>
+      <ul id="results"></ul>
+    </div>
+
+    <script>
+      $("#mafia-submit").click(function(e) {
+        e.preventDefault();
+        var results = $("#mafia-form").serializeArray();
+        console.log(results);
+        var mafia_obj = { detective: "off", dr: "off" };
+        results.forEach(function(d) {
+          mafia_obj[d["name"]] = d["value"];
+        });
+        mafia_obj["names"] = mafia_obj["names"].split(" ");
+        mafia_obj["mafia_count"] = parseInt(mafia_obj["mafia_count"]);
+        mafia_obj["detective"] = mafia_obj["detective"] === "on" ? true : false;
+        mafia_obj["dr"] = mafia_obj["dr"] === "on" ? true : false;
+        // console.log(mafia_obj);
+        if (mafia_obj["names"].length > 1) {
+          console.log(mafia_obj);
+          //   $.ajax({
+          //     type: "POST",
+          //     headers: { "Access-Control-Allow-Origin": "*" },
+          //     contentType: "application/json",
+          //     url:
+          //       "https://us-central1-urbanactivity-199915.cloudfunctions.net/function-1",
+          //     data: JSON.stringify(mafia_obj),
+          //     dataType: "json",
+          //     success: function(response) {
+          //       console.log(response);
+          //     }
+          //   });
+          axios({
+            method: "post",
+            url:
+              "https://us-central1-urbanactivity-199915.cloudfunctions.net/function-1", // or https://us-central1-PROJECT_NAME.cloudfunctions.net/test_message_json
+            data: mafia_obj
+          })
+            .then(response => {
+              var mafia_result = response.data;
+              $("body").append("");
+              Object.keys(mafia_result).forEach(function(name) {
+                $("#results").append(
+                  `<li>${name}: ${mafia_result[name]} </li>`
+                );
+              });
+            })
+            .catch(error => {
+              console.log(error);
+            });
+        } else {
+          alert("please enter names with space between names");
+        }
+      });
+    </script>
+  </body>
+</html>

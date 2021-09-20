@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="initial-scale=1, maximum-scale=1, user-scalable=no"
+    />
+    <link
+      rel="stylesheet"
+      href="https://js.arcgis.com/4.14/esri/themes/light/main.css"
+    />
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+
+    <script src="https://js.arcgis.com/4.14/"></script>
+    <title>test</title>
+    <style>
+      html,
+      body {
+        height: 100%;
+        width: 100%;
+      }
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="viewDiv"></div>
+  </body>
+  <script>
+    require([
+      "esri/Map",
+      "esri/views/MapView",
+      "esri/layers/FeatureLayer",
+      "esri/widgets/Legend",
+      "esri/widgets/Slider",
+      "esri/widgets/Expand",
+      "esri/layers/GeoJSONLayer",
+    ], function (
+      Map,
+      MapView,
+      FeatureLayer,
+      Legend,
+      Slider,
+      Expand,
+      GeoJSONLayer
+    ) {
+      const template = {
+        title: "tweet",
+        content: "{text} <hr> sentiment: {sentiment}",
+      };
+      const clusterConfig = {
+        type: "cluster",
+        clusterRadius: "100px",
+        // {cluster_count} is an aggregate field containing
+        // the number of features comprised by the cluster
+        popupTemplate: {
+          content: "This cluster represents {cluster_count} tweets.",
+        },
+      };
+
+      const renderer = {
+        type: "simple",
+
+        symbol: {
+          type: "simple-marker",
+          size: 7,
+
+          outline: {
+            color: "white",
+          },
+        },
+        visualVariables: [
+          {
+            type: "color",
+            field: "sentiment",
+            stops: [
+              {
+                value: -0.1,
+                color: "#FF5733",
+                label: "negative sentiment < 0.1",
+              },
+              {
+                value: 0.1,
+                color: "#01B90F",
+                label: "positive sentiment >0.1",
+              },
+            ],
+          },
+        ],
+      };
+
+      const hrenderer = {
+        type: "heatmap",
+        colorStops: [
+          { ratio: 0, color: "rgba(255, 255, 255, 0)" },
+          { ratio: 0.2, color: "rgba(255, 255, 255, 0.1)", opacity: 0.5 },
+          { ratio: 0.5, color: "rgba(255, 140, 0, 0.5)", opacity: 0.5 },
+          { ratio: 0.8, color: "rgba(255, 140, 0, 0.5)", opacity: 0.5 },
+          { ratio: 1, color: "rgba(255, 0, 0, 0.1)", opacity: 0.5 },
+        ],
+        maxPixelIntensity: 50,
+        minPixelIntensity: 2,
+      };
+
+      const geojsonLayer = new GeoJSONLayer({
+        url: "./tweetPoints.geojson",
+        popupTemplate: template,
+        title: "geolocated tweets",
+        // featureReduction: clusterConfig,
+        renderer: renderer, //optional
+      });
+
+      const heatmapLayer = new GeoJSONLayer({
+        url: "./tweetPoints.geojson",
+        title: "number of tweets",
+        opacity: 0.5,
+        renderer: hrenderer,
+      });
+
+      var map = new Map({
+        basemap: "dark-gray",
+        layers: [
+          //heatmapLayer,
+          geojsonLayer,
+        ],
+      });
+
+      var view = new MapView({
+        container: "viewDiv",
+        map: map,
+        center: [-97.362231, 39.42908], // longitude, latitude
+        zoom: 5,
+      });
+
+      view.ui.add(
+        new Legend({
+          view: view,
+        }),
+        "top-right"
+      );
+    });
+  </script>
+</html>
+,
