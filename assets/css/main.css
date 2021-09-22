@@ -3959,9 +3959,14 @@ body.is-preload #sidebar nav ul li {
 .imagenav {
   /* height: 80px; */
   width: 100%;
+  max-height: 90%;
   margin-bottom: 50px;
 }
 
 .headshot {
   width: 100%;
+}
+
+.highlight-component {
+  border-bottom: 2px solid #1c1f33;
 }
