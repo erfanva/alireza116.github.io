@@ -3094,7 +3094,7 @@ body.is-ie .spotlights > section {
   border-radius: 0;
   display: block;
   position: relative;
-  width: 25em;
+  width: 30%;
 }
 
 .spotlights > section > .image img {
@@ -3132,7 +3132,7 @@ body.is-ie .spotlights > section {
   -webkit-justify-content: center;
   -ms-justify-content: center;
   justify-content: center;
-  width: 50em;
+  width: 70%;
   -ms-flex: 1;
 }
 
@@ -3970,4 +3970,5 @@ body.is-preload #sidebar nav ul li {
 .highlight-component {
   border-bottom: 2px solid #1c1f33;
   display: grid;
+  grid-template-columns: repeat(12, 1fr);
 }
