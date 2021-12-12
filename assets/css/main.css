@@ -3827,7 +3827,8 @@ body.is-ie #sidebar > .inner {
   background-image: -moz-linear-gradient(to right, #eee2dc, #f3743e);
   background-image: -webkit-linear-gradient(to right, #eee2dc, #f3743e);
   background-image: -ms-linear-gradient(to right, #eee2dc, #f3743e);
-  background-image: linear-gradient(to right, #eee2dc, #f3743e);
+  /* background-image: linear-gradient(to right, #eee2dc, #f3743e); */
+  background-color: #cd5d67;
   -moz-transition: max-width 0.2s ease;
   -webkit-transition: max-width 0.2s ease;
   -ms-transition: max-width 0.2s ease;
@@ -3920,7 +3921,13 @@ body.is-preload #sidebar nav ul li {
 }
 
 @media screen and (max-width: 736px) {
-  #sidebar {
+  /* #sidebar {
+    display: none;
+  } */
+  #sidebar nav ul li {
+    margin-left: 10px;
+  }
+  .imagenav {
     display: none;
   }
 }
