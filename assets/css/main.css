@@ -3820,13 +3820,13 @@ body.is-ie #sidebar > .inner {
 }
 
 #sidebar nav a:before {
-  background: #bab2b5;
+  background: #f5f3f3;
 }
 
 #sidebar nav a:after {
-  background-image: -moz-linear-gradient(to right, #eee2dc, #f3743e);
+  /* background-image: -moz-linear-gradient(to right, #eee2dc, #f3743e);
   background-image: -webkit-linear-gradient(to right, #eee2dc, #f3743e);
-  background-image: -ms-linear-gradient(to right, #eee2dc, #f3743e);
+  background-image: -ms-linear-gradient(to right, #eee2dc, #f3743e); */
   /* background-image: linear-gradient(to right, #eee2dc, #f3743e); */
   background-color: #cd5d67;
   -moz-transition: max-width 0.2s ease;
@@ -3836,12 +3836,13 @@ body.is-ie #sidebar > .inner {
   max-width: 0;
 }
 
-#sidebar nav a:hover {
-  color: rgba(255, 255, 255, 0.55);
+#sidebar nav a {
+  color: rgba(245, 241, 241, 1);
 }
 
 #sidebar nav a.active {
   color: #cd5d67;
+  font-size: 0.75em;
 }
 
 #sidebar nav a.active:after {
