@@ -187,7 +187,7 @@ html {
 }
 
 body {
-  background: #312450;
+  background: #272d54;
 }
 
 body.is-preload *,
@@ -3285,14 +3285,14 @@ table.alt tfoot {
 }
 
 .wrapper > .inner {
-  padding: 5em 5em 3em 5em;
+  padding: 4em 4em 4em 4em;
   max-width: 100%;
   width: 75em;
 }
 
 @media screen and (max-width: 1680px) {
   .wrapper > .inner {
-    padding: 4em 4em 2em 4em;
+    padding: 4em 4em 4em 4em;
   }
 }
 
